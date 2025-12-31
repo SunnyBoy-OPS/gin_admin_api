@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="fa9bb33c-d1ee-459a-b90d-caa231ca9d35" name="ginblog Mapping">
+      <data-sources db="3c3d0436-7eda-4fbd-bcab-cb8b6eb2c113" ddl="826f87d4-0065-4ea1-a54f-d34dc4762bb3" />
+      <scope>
+        <node kind="schema" qname="ginblog" />
+      </scope>
+    </mapping>
+  </component>
+</project>
