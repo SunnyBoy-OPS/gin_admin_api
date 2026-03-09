@@ -46,3 +46,18 @@ func LoginApi(c *gin.Context) {
 	// LoginReq 处理登录的api
 	LoginQuery(c)
 }
+
+// Backup_ginblogApi ginblog数据库备份接口
+// @Summary 数据库备份
+// @Description 通过SSH在Linux执行mysqldump并保存到本地SQL目录
+// @Tags 数据库备份接口
+// @Accept json
+// @Produce json
+// @Success 200 {object} result.Result
+// @Failure 400 {object} map[string]interface{}
+// @Failure 503 {object} map[string]interface{}
+// @Router /api/backupMysql [post]
+func Backup_ginblogApi(c *gin.Context) {
+	// LoginReq 处理登录的api
+	BackupMySQL(c)
+}

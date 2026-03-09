@@ -24,3 +24,10 @@ mysql:
   charset: utf8
   maxIdle: 50
   maxOpen: 150
+
+# ssh连接Linux服务器配置
+ssh:
+  host: 10.0.0.105
+  port: 22
+  user: root
+  password: 123456

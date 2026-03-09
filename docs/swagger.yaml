@@ -16,6 +16,31 @@ info:
   title: Admin 管理系统
   version: "1.0"
 paths:
+  /api/backupMysql:
+    post:
+      consumes:
+      - application/json
+      description: 通过SSH在Linux执行mysqldump并保存到本地SQL目录
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "503":
+          description: Service Unavailable
+          schema:
+            additionalProperties: true
+            type: object
+      summary: 数据库备份
+      tags:
+      - 数据库备份接口
   /api/failed:
     get:
       description: 失败测试接口

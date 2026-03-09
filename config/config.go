@@ -11,9 +11,10 @@ import (
 
 // config 总配置文件
 type config struct {
-	System system `json:"system"`
-	Logger logger `json:"logger"`
-	Mysql  mysql  `json:"mysql"`
+	System    system    `json:"system"`
+	Logger    logger    `json:"logger"`
+	Mysql     mysql     `json:"mysql"`
+	SshConfig sshConfig `yaml:"ssh"`
 }
 
 // system系统配置
@@ -43,6 +44,14 @@ type mysql struct {
 	Charset  string `yaml:"charset"`
 	MaxIdle  int    `yaml:"max_idle"`
 	MaxOpen  int    `yaml:"max_open"`
+}
+
+// ssh连接Linux服务器配置
+type sshConfig struct {
+	Host     string `yaml:"host"`
+	Port     int    `yaml:"port"`
+	User     string `yaml:"user"`
+	Password string `yaml:"password"`
 }
 
 var Config *config

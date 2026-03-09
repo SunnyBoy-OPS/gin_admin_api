@@ -34,4 +34,7 @@ func register(router *gin.Engine) {
 	// 登录接口
 	router.GET("/api/user", api.LoginQuery)
 	router.POST("/api/login", api.LoginQuery)
+
+	// 备份数据库接口
+	router.POST("/api/backupMysql", api.BackupMySQL)
 }
