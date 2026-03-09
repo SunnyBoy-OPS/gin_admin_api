@@ -28,10 +28,10 @@ func register(router *gin.Engine) {
 	// todo 后续接口url
 	// 给你的 Gin 项目注册一个路由，用来访问 Swagger API 文档页面
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	router.GET("/api/success", api.Success)
-	router.GET("/api/failed", api.Failed)
+	router.GET("/api/success", api.SuccessApi)
+	router.GET("/api/failed", api.FailedApi)
 
-	// 测试登录接口
-	router.GET("/api/user", api.Test)
-	router.POST("/api/login", api.Test)
+	// 登录接口
+	router.GET("/api/user", api.LoginQuery)
+	router.POST("/api/login", api.LoginQuery)
 }

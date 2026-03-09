@@ -1,4 +1,4 @@
-﻿package api
+package api
 
 import (
 	"gin_admin_api/core"
@@ -8,12 +8,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// QueryUser 登录请求参数（Query）
 func QueryUser(username string, password string) ([]model.User, error) {
 	var userList []model.User
 	err := core.Db.Where("UserName = ? and UserPassword = ?", username, password).Find(&userList).Error
 	return userList, err
 }
-func Test(c *gin.Context) {
+
+// LoginQuery 处理登录的api
+func LoginQuery(c *gin.Context) {
+	//c := new(gin.Context)
 	var users []model.User
 
 	// 获取url上的username，password参数值
@@ -26,6 +30,7 @@ func Test(c *gin.Context) {
 			"code": http.StatusBadRequest,
 			"msg":  "账号密码不能为空！",
 		})
+		return
 	}
 	// 获取到的值传给QueryUser 去数据库查询
 	users, err := QueryUser(username, password)
