@@ -9,9 +9,9 @@ http://localhost:5001/api/login
 
 **接口参数:**
 
-|    **参数** | 值 | 备注 |
-| --- | --- | --- |
-| username | wjs | 测试 |
-| password | wjs | 测试 |
+|    **参数** | 值 | 备注      |
+| --- | --- |---------|
+| username | wjs | 账号-test |
+| password | wjs | 密码-test |
 
 
