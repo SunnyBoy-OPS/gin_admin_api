@@ -28,7 +28,7 @@ func Success(c *gin.Context, data interface{}) {
 }
 
 // Failed 失败
-func Fail(c *gin.Context, code int, message string) {
+func Failed(c *gin.Context, code int, message string) {
 
 	res := Result{}
 	res.Code = code

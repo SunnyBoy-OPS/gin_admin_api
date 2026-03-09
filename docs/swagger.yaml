@@ -1,0 +1,46 @@
+definitions:
+  result.Result:
+    properties:
+      code:
+        description: 返回状态码
+        type: integer
+      data:
+        description: 返回数据
+      message:
+        description: 提示信息
+        type: string
+    type: object
+info:
+  contact: {}
+  description: Admin后台管理系统
+  title: Admin 管理系统
+  version: "1.0"
+paths:
+  /api/failed:
+    get:
+      description: 失败测试接口
+      produces:
+      - application/json
+      responses: {}
+      summary: 失败测试接口
+      tags:
+      - 测试相关接口
+  /api/success:
+    get:
+      description: 成功测试接口
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      summary: 成功测试接口
+      tags:
+      - 测试相关接口
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

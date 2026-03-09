@@ -20,5 +20,7 @@ go get -u github.com/gin-gonic/gin
 //给你的 Gin 项目注册一个路由，用来访问 Swagger API 文档页面
 go get github.com/swaggo/files
 go get github.com/swaggo/gin-swagger
+    # 下载swag
+    go get -u github.com/swaggo/swag/cmd/swag
     # 安装一下swag
-go install github.com/swaggo/swag/cmd/swag@latest
+    go install github.com/swaggo/swag/cmd/swag@latest
