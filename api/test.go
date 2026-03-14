@@ -33,7 +33,7 @@ func FailedApi(c *gin.Context) {
 // LoginApi 用户登录
 // @Summary 用户登录
 // @Description 根据用户名和密码登录
-// @Tags 用户登录接口
+// @Tags 用户登录接口--不生成token
 // @Accept json
 // @Produce json
 // @Param username query string true "用户名"
@@ -44,6 +44,7 @@ func FailedApi(c *gin.Context) {
 // @Router /api/login [post]
 func LoginApi(c *gin.Context) {
 	// LoginReq 处理登录的api
+	//LoginQuery(c)
 	LoginQuery(c)
 }
 
@@ -60,4 +61,20 @@ func LoginApi(c *gin.Context) {
 func Backup_ginblogApi(c *gin.Context) {
 	// LoginReq 处理登录的api
 	BackupMySQL(c)
+}
+
+// LoginTokenApi LoginToken LoginApi 用户登录
+// @Summary 用户登录
+// @Description 根据用户名和密码登录
+// @Tags 用户登录接口--生成token
+// @Accept json
+// @Produce json
+// @Param username query string true "用户名"
+// @Param password query string true "密码"
+// @Success 200 {object} result.Result
+// @Failure 400 {object} map[string]interface{}
+// @Failure 503 {object} map[string]interface{}
+// @Router /api/login [post]
+func LoginTokenApi(c *gin.Context) {
+	LoginToken(c)
 }

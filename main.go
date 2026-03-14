@@ -19,7 +19,7 @@ import (
 // @in header
 // @name Authorization
 func main() {
-	// AdminVue()
+
 	global.Log = core.InitLogger()
 	//global.Log.Infof("mysql配置: %s", config.Config.Mysql)
 	//初始化mysql

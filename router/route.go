@@ -20,20 +20,27 @@ func InitRouter() *gin.Engine {
 	router.Use(gin.Recovery())
 	//register注册
 	register(router)
+
 	return router
 }
 
 // register 路由接口
 func register(router *gin.Engine) {
 	// todo 后续接口url
-	// 给你的 Gin 项目注册一个路由，用来访问 Swagger API 文档页面
+	// 给 Gin 项目注册一个路由，用来访问 Swagger API 文档页面
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	router.GET("/api/success", api.SuccessApi)
 	router.GET("/api/failed", api.FailedApi)
 
-	// 登录接口
-	router.GET("/api/user", api.LoginQuery)
+	//不需要携带token登录
 	router.POST("/api/login", api.LoginQuery)
+	//登录生产token
+	router.POST("/logintoken", api.LoginToken)
+
+	// 后续接口访问都需要携带token认证
+	//auth := router.Group("/api/auth")
+	//auth.Use(middleware.JWTAuth())
+	//auth.POST("/logintoken", api.LoginToken)
 
 	// 备份数据库接口
 	router.POST("/api/backupMysql", api.BackupMySQL)

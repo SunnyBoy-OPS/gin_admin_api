@@ -24,3 +24,5 @@ go get github.com/swaggo/gin-swagger
     go get -u github.com/swaggo/swag/cmd/swag
     # 安装一下swag
     go install github.com/swaggo/swag/cmd/swag@latest
+//重新写入swag
+swag init -g main.go -o docs 

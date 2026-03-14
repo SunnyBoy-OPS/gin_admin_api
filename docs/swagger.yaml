@@ -89,7 +89,7 @@ paths:
             type: object
       summary: 用户登录
       tags:
-      - 用户登录接口
+      - 用户登录接口--生成token
   /api/success:
     get:
       description: 成功测试接口

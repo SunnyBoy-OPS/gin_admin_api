@@ -82,7 +82,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "用户登录接口"
+                    "用户登录接口--生成token"
                 ],
                 "summary": "用户登录",
                 "parameters": [

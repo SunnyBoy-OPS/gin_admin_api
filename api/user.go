@@ -1,18 +1,18 @@
-// Package api 登录没有token接口
+// Package api 处理登录接口--登录生成token接口
 package api
 
 import (
 	"gin_admin_api/dao"
 	"gin_admin_api/model"
+	"gin_admin_api/service"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-// LoginQuery 处理登录的api
-func LoginQuery(c *gin.Context) {
-	//c := new(gin.Context)
-	var users []model.User
+// LoginToken 处理登录接口
+func LoginToken(c *gin.Context) {
+	var userlist []model.User
 
 	// 获取url上的username，password参数值
 	username := c.Query("username")
@@ -26,28 +26,38 @@ func LoginQuery(c *gin.Context) {
 		})
 		return
 	}
-	// 获取到的值传给QueryUser 去数据库查询
-	users, err := dao.GetUser(username, password)
+
+	// url获取到的值传给QueryUser 调用GetUser数据库查询
+	userlist, err := dao.GetUser(username, password)
 	if err != nil {
 		c.JSON(http.StatusServiceUnavailable, gin.H{
 			"code":  http.StatusServiceUnavailable,
-			"msg":   "服务器或者数据库查询失败",
+			"msg":   "服务器或者数据库查询失败!",
 			"error": err.Error(),
 		})
-		return
-	} else if len(users) == 0 {
+	} else if len(userlist) == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"code": http.StatusBadRequest,
-			"msg":  "账号密码错误",
-			"data": users,
+			"msg":  "账号密码错误!",
+			"data": userlist,
+		})
+		return
+	}
+
+	//获取到token
+	token, err := service.LoginToken(username, password)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+			"msg":   "账户密码错误！！！",
 		})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"code":  http.StatusOK,
+		"data":  userlist,
 		"msg":   "登录成功",
-		"count": len(users),
-		"data":  users,
+		"token": token,
 	})
 	return
 }
