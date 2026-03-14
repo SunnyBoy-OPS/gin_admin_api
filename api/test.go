@@ -74,7 +74,7 @@ func Backup_ginblogApi(c *gin.Context) {
 // @Success 200 {object} result.Result
 // @Failure 400 {object} map[string]interface{}
 // @Failure 503 {object} map[string]interface{}
-// @Router /api/login [post]
+// @Router /api/logintoken [post]
 func LoginTokenApi(c *gin.Context) {
 	LoginToken(c)
 }

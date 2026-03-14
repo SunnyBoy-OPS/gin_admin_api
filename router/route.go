@@ -32,10 +32,10 @@ func register(router *gin.Engine) {
 	router.GET("/api/success", api.SuccessApi)
 	router.GET("/api/failed", api.FailedApi)
 
-	//不需要携带token登录
+	//登录不生成token
 	router.POST("/api/login", api.LoginQuery)
-	//登录生产token
-	router.POST("/logintoken", api.LoginToken)
+	//登录生成token
+	router.POST("/api/logintoken", api.LoginToken)
 
 	// 后续接口访问都需要携带token认证
 	//auth := router.Group("/api/auth")

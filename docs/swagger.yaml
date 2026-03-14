@@ -89,6 +89,42 @@ paths:
             type: object
       summary: 用户登录
       tags:
+      - 用户登录接口--不生成token
+  /api/logintoken:
+    post:
+      consumes:
+      - application/json
+      description: 根据用户名和密码登录
+      parameters:
+      - description: 用户名
+        in: query
+        name: username
+        required: true
+        type: string
+      - description: 密码
+        in: query
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "503":
+          description: Service Unavailable
+          schema:
+            additionalProperties: true
+            type: object
+      summary: 用户登录
+      tags:
       - 用户登录接口--生成token
   /api/success:
     get:
