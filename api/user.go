@@ -1,4 +1,4 @@
-// Package api 处理登录接口--登录生成token接口
+﻿// Package api 处理登录接口--登录生成token接口
 package api
 
 import (
@@ -12,23 +12,35 @@ import (
 
 // LoginToken 处理登录接口
 func LoginToken(c *gin.Context) {
-	var userlist []model.User
-
-	// 获取url上的username，password参数值
-	username := c.Query("username")
-	password := c.Query("password")
-
-	// 判断拿到的username，password是否是空值，是直接返回前端
-	if username == "" || password == "" {
+	//从请求体里拿 token”，Gin 的写法是先绑定 JSON
+	var req model.LoginReq
+	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"code": http.StatusBadRequest,
-			"msg":  "账号密码不能为空！",
+			"code":  http.StatusBadRequest,
+			"msg":   "账户密码错误",
+			"error": err.Error(),
 		})
 		return
 	}
+	username := req.Username
+	password := req.Password
+
+	// 获取url上的username，password参数值
+	//username := c.Query("username")
+	//password := c.Query("password")
+	//
+	//// 判断拿到的username，password是否是空值，是直接返回前端
+	//if username == "" || password == "" {
+	//	c.JSON(http.StatusBadRequest, gin.H{
+	//		"code": http.StatusBadRequest,
+	//		"msg":  "账号密码不能为空！",
+	//	})
+	//	return
+	//}
 
 	// url获取到的值传给QueryUser 调用GetUser数据库查询
 	userlist, err := dao.GetUser(username, password)
+
 	if err != nil {
 		c.JSON(http.StatusServiceUnavailable, gin.H{
 			"code":  http.StatusServiceUnavailable,
@@ -44,8 +56,8 @@ func LoginToken(c *gin.Context) {
 		return
 	}
 
-	//获取到token
-	token, err := service.LoginToken(username, password)
+	//用Id获取到token
+	token, err := service.LoginToken(userlist[0].Id)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
