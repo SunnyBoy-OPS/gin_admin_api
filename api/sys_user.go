@@ -12,7 +12,7 @@ import (
 // LoginQuery 处理登录的api
 func LoginQuery(c *gin.Context) {
 	//c := new(gin.Context)
-	var users []model.User
+	var userList []model.User
 
 	// 获取url上的username，password参数值
 	username := c.Query("username")
@@ -27,7 +27,7 @@ func LoginQuery(c *gin.Context) {
 		return
 	}
 	// 获取到的值传给QueryUser 去数据库查询
-	users, err := dao.GetUser(username, password)
+	userList, err := dao.GetUser(username, password)
 	if err != nil {
 		c.JSON(http.StatusServiceUnavailable, gin.H{
 			"code":  http.StatusServiceUnavailable,
@@ -35,19 +35,19 @@ func LoginQuery(c *gin.Context) {
 			"error": err.Error(),
 		})
 		return
-	} else if len(users) == 0 {
+	} else if len(userList) == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"code": http.StatusBadRequest,
 			"msg":  "账号密码错误",
-			"data": users,
+			"data": userList,
 		})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"code":  http.StatusOK,
 		"msg":   "登录成功",
-		"count": len(users),
-		"data":  users,
+		"count": len(userList),
+		"data":  userList,
 	})
 	return
 }

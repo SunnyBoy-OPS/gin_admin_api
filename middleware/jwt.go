@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"gin_admin_api/service"
+	"gin_admin_api/utils"
 	"net/http"
 	"strings"
 
@@ -20,11 +20,11 @@ func JWTAuth() gin.HandlerFunc {
 			})
 			c.Abort()
 		}
-		
+
 		// 去掉Bearer
 		tokenString := strings.TrimPrefix(authHeader, "Bearer ")
 
-		claims, err := service.ParseToken(tokenString)
+		claims, err := utils.ParseToken(tokenString)
 		if err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"code": http.StatusUnauthorized,
@@ -32,7 +32,8 @@ func JWTAuth() gin.HandlerFunc {
 			})
 			return
 		}
-		c.Set("username", claims.Username)
+		c.Set("id", claims.Id)
+
 		c.Next()
 	}
 }

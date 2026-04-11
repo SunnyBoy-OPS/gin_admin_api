@@ -11,3 +11,10 @@ func GetUser(username string, password string) ([]model.User, error) {
 	err := core.Db.Where("UserName = ? and UserPassword = ?", username, password).Find(&userList).Error
 	return userList, err
 }
+
+// GetUserId 生成token需要根据用户名Id
+//func GetUserId(id int) (int, error) {
+//	var userList []model.User
+//	err := core.Db.Where("UserName = ? and UserPassword = ?", id).Find(&userList).Error
+//	return userList[0].Id, err
+//}
