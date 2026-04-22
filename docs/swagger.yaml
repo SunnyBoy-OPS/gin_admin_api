@@ -1,4 +1,20 @@
 definitions:
+  model.ConnectTestHost:
+    properties:
+      host:
+        type: string
+      password:
+        type: string
+      port:
+        type: integer
+      username:
+        type: string
+    required:
+    - host
+    - password
+    - port
+    - username
+    type: object
   result.Result:
     properties:
       code:
@@ -41,6 +57,38 @@ paths:
       summary: 数据库备份
       tags:
       - 数据库备份接口
+  /api/connect-test-host:
+    post:
+      consumes:
+      - application/json
+      description: 测试连接主机（host/ip、端口、账号、密码）
+      parameters:
+      - description: 通过 SSH 测试连接主机
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.ConnectTestHost'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "503":
+          description: Service Unavailable
+          schema:
+            additionalProperties: true
+            type: object
+      summary: 测试连接主机
+      tags:
+      - 测试连接主机--（host/ip、端口、账号、密码）
   /api/failed:
     get:
       description: 失败测试接口
@@ -139,6 +187,38 @@ paths:
       summary: 成功测试接口
       tags:
       - 测试相关接口
+  /api/total-metric:
+    post:
+      consumes:
+      - application/json
+      description: 通过 SSH 采集主机配置（CPU核数、内存总量、磁盘总量）
+      parameters:
+      - description: 通过 SSH 采集主机配置
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.ConnectTestHost'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "503":
+          description: Service Unavailable
+          schema:
+            additionalProperties: true
+            type: object
+      summary: 通过 SSH 采集主机配置（CPU核数、内存总量、磁盘总量）
+      tags:
+      - 测试连接主机--（host/ip、端口、账号、密码）
 securityDefinitions:
   ApiKeyAuth:
     in: header

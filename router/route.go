@@ -27,6 +27,7 @@ func InitRouter() *gin.Engine {
 // register 路由接口
 func register(router *gin.Engine) {
 	// todo 后续接口url
+
 	// 给 Gin 项目注册一个路由，用来访问 Swagger API 文档页面
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	router.GET("/api/success", api.SuccessApi)
@@ -44,4 +45,10 @@ func register(router *gin.Engine) {
 
 	// 备份数据库接口
 	router.POST("/api/backupMysql", api.BackupMySQL)
+
+	//##############################业务接口####################################
+	//测试连接主机
+	router.POST("/api/connect-test-host", api.ConnectTestHost)
+	//数据采集：cpu，内存，磁盘整数
+	router.POST("/api/total-metric", api.TotalMetric)
 }

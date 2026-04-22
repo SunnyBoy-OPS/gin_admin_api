@@ -78,3 +78,33 @@ func Backup_ginblogApi(c *gin.Context) {
 func LoginTokenApi(c *gin.Context) {
 	LoginToken(c)
 }
+
+// ConnectTestHostApi 测试连接主机（host/ip、端口、账号、密码）
+// @Summary 测试连接主机
+// @Description 测试连接主机（host/ip、端口、账号、密码）
+// @Tags 测试连接主机--（host/ip、端口、账号、密码）
+// @Accept json
+// @Produce json
+// @Param data body model.ConnectTestHost true "通过 SSH 测试连接主机"
+// @Success 200 {object} result.Result
+// @Failure 400 {object} map[string]interface{}
+// @Failure 503 {object} map[string]interface{}
+// @Router /api/connect-test-host [post]
+func ConnectTestHostApi(c *gin.Context) {
+	ConnectTestHost(c)
+}
+
+// TotalMetricApi 通过 SSH 采集主机配置（CPU核数、内存总量、磁盘总量）
+// @Summary 通过 SSH 采集主机配置（CPU核数、内存总量、磁盘总量）
+// @Description 通过 SSH 采集主机配置（CPU核数、内存总量、磁盘总量）
+// @Tags 测试连接主机--（host/ip、端口、账号、密码）
+// @Accept json
+// @Produce json
+// @Param data body model.ConnectTestHost true "通过 SSH 采集主机配置"
+// @Success 200 {object} result.Result
+// @Failure 400 {object} map[string]interface{}
+// @Failure 503 {object} map[string]interface{}
+// @Router /api/total-metric [post]
+func TotalMetricApi(c *gin.Context) {
+	TotalMetric(c)
+}
